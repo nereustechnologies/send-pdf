@@ -18,7 +18,7 @@ router.post('/send-pdf', (req, res) => {
     const base64Pdf = pdfBuffer.toString('base64');
 
     // Send to n8n
-    const n8nRes = await fetch('http://<n8n-url>', {
+    const n8nRes = await fetch('http://129.154.255.167:5678/webhook/80fcad87-092c-4916-9978-af6b7e9ed626', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
