@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const formidable = require('formidable');
+import cors from 'cors';
+const { IncomingForm } = require('formidable');
 const fs = require('fs');
-
+// ✅ Allow all origins for dev (or restrict to localhost:3000)
+app.use(cors({
+  origin: '*', // or '*' for all
+}));
 router.post('/send-pdf', (req, res) => {
-  const form = formidable({ multiples: false });
+    const form = new IncomingForm({ multiples: false });
 
   form.parse(req, async (err, fields, files) => {
     if (err) return res.status(500).send('Form parse error');
