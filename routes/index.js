@@ -14,12 +14,17 @@ router.post('/send-pdf', (req, res) => {
     if (err) return res.status(500).send('Form parse error');
 
     const { name, email, id } = fields;
-    const pdf = files.pdf;
+  const pdfFile = (Array.isArray(files.pdf) ? files.pdf[0] : files.pdf) 
 
-    if (!pdf || !pdf.filepath) return res.status(400).send('Missing PDF');
+
+    if (!pdfFile || !pdfFile.filepath) {
+      console.error('❌ Missing PDF file. Parsed:', pdfFile);
+      return res.status(400).json({ message: 'PDF file missing' });
+    }
 
     try {
-      const pdfBuffer = fs.readFileSync(pdf.filepath);
+     const pdfBuffer = fs.readFileSync(pdfFile.filepath);
+
       const base64Pdf = pdfBuffer.toString('base64');
 
       const n8nRes = await fetch('http://129.154.255.167:5678/webhook/80fcad87-092c-4916-9978-af6b7e9ed626', {
