@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-import cors from 'cors';
+const cors = require('cors'); // ✅ CommonJS
+
 const { IncomingForm } = require('formidable');
 const fs = require('fs');
 // ✅ Allow all origins for dev (or restrict to localhost:3000)
