@@ -3,9 +3,8 @@ const router = express.Router();
 const cors = require('cors');
 const { IncomingForm } = require('formidable');
 const fs = require('fs');
-const fetch = require('node-fetch'); // ✅ Required for Node < 18
 
-// Allow all origins (adjust for production)
+// CORS middleware
 router.use(cors({ origin: '*' }));
 
 router.post('/send-pdf', (req, res) => {
